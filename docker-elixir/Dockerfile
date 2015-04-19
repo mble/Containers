@@ -3,6 +3,8 @@ MAINTAINER Matt Blewitt <blewitt.matt+docker@gmail.com>
 
 WORKDIR /root
 
+ENV ELIXIR_VER 1.0.4
+
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
 
 # Set timezone + locale
@@ -19,15 +21,15 @@ RUN curl http://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb -o /r
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /root/erlang-solutions_1.0_all.deb
 
 # Install elixir 1.0.3
-RUN curl -L https://github.com/elixir-lang/elixir/releases/download/v1.0.3/Precompiled.zip -o /root/elixir-1.0.3.zip && \
-    unzip /root/elixir-1.0.3.zip -d /usr/local/elixir-1.0.3 && \
-    rm -f /root/elixir-1.0.3.zip
+RUN curl -L https://github.com/elixir-lang/elixir/releases/download/v$ELIXIR_VER/Precompiled.zip -o /root/elixir-$ELIXIR_VER.zip && \
+    unzip /root/elixir-$ELIXIR_VER.zip -d /usr/local/elixir-$ELIXIR_VER && \
+    rm -f /root/elixir-$ELIXIR_VER.zip
 
 # Symlink iex, mix etc
-RUN ln -s /usr/local/elixir-1.0.3/bin/elixir /usr/local/bin/ && \
-    ln -s /usr/local/elixir-1.0.3/bin/elixirc /usr/local/bin/ && \
-    ln -s /usr/local/elixir-1.0.3/bin/iex /usr/local/bin/ && \
-    ln -s /usr/local/elixir-1.0.3/bin/mix /usr/local/bin/
+RUN ln -s /usr/local/elixir-$ELIXIR_VER/bin/elixir /usr/local/bin/ && \
+    ln -s /usr/local/elixir-$ELIXIR_VER/bin/elixirc /usr/local/bin/ && \
+    ln -s /usr/local/elixir-$ELIXIR_VER/bin/iex /usr/local/bin/ && \
+    ln -s /usr/local/elixir-$ELIXIR_VER/bin/mix /usr/local/bin/
 
 # Install local Elixir hex and rebar
 RUN /usr/local/bin/mix local.hex --force && \
