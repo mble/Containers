@@ -1,5 +1,5 @@
 FROM phusion/baseimage:0.9.16
-MAINTAINER Matt Blewitt <blewitt.matt@gmail.com>
+MAINTAINER Matt Blewitt <blewitt.matt+docker@gmail.com>
 
 WORKDIR /root
 

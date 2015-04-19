@@ -1,5 +1,5 @@
 FROM java:8
-MAINTAINER Matt Blewitt <blewitt.matt@gmail.com>
+MAINTAINER Matt Blewitt <blewitt.matt+docker@gmail.com>
 
 # Set non-interactive mode
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
